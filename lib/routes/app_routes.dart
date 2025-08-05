@@ -6,6 +6,10 @@ import '../features/auth/login_page.dart';
 import '../features/stockkeeper/stockkeeper_home.dart';
 import '../features/cashier/cashier_dashboard.dart';
 // import '../features/admin/admin_dashboard.dart';
+import '../features/splashscreen.dart';
+import '../features/cashier/billingview.dart';
+
+
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings, BuildContext context) {
@@ -14,7 +18,7 @@ class AppRoutes {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const POSHomePage());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginPage(role: 'StockKeeper'));
       case '/stockkeeper':
@@ -24,7 +28,7 @@ class AppRoutes {
         break;
       case '/cashier':
         if (user != null && user.role == 'Cashier') {
-          return MaterialPageRoute(builder: (_) => const CashierDashboard());
+          return MaterialPageRoute(builder: (_) => const CashierViewPage());
         }
         break;
       // 
