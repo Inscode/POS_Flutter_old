@@ -195,3 +195,26 @@
 //     );
 //   }
 // }
+
+
+import 'package:flutter/material.dart';
+
+class StockKeeperDashboard extends StatelessWidget {
+  const StockKeeperDashboard({Key? key}) : super(key: key);  // Constructor
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Stock Keeper dashboard'),
+        backgroundColor: const Color(0xFF0B1623),
+      ),
+      body: const Center(
+        child: Text(
+          'Welcome to Stock Keeper dash hutttooo!',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}

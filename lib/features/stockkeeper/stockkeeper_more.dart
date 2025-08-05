@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StockKeeperProducts extends StatelessWidget {
-  const StockKeeperProducts({Key? key}) : super(key: key);  // Constructor
+class StockKeeperMore extends StatelessWidget {
+  const StockKeeperMore({Key? key}) : super(key: key);  // Constructor
 
   @override
   Widget build(BuildContext context) {
