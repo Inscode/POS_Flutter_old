@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../features/login/auth/login_page.dart'; // ✅ Import the login page
+import '../auth/login_page.dart'; // Adjust the import path
 
 class POSHomePage extends StatelessWidget {
   const POSHomePage({super.key});
@@ -29,10 +29,16 @@ class POSHomePage extends StatelessWidget {
                     runSpacing: 20,
                     children: const [
                       RoleCard(
-                        title: 'Stock Keeper',
+                        title: 'StockKeeper',
                         subtitle: 'Manage Stock',
                         icon: Icons.inventory_2,
                         color: Colors.orange,
+                      ),
+                      RoleCard(
+                        title: 'Cashier',
+                        subtitle: 'Quick Billing',
+                        icon: Icons.receipt_long,
+                        color: Colors.green,
                       ),
                       RoleCard(
                         title: 'Admin',
@@ -45,12 +51,6 @@ class POSHomePage extends StatelessWidget {
                         subtitle: 'Oversee Sales',
                         icon: Icons.supervisor_account,
                         color: Colors.blue,
-                      ),
-                      RoleCard(
-                        title: 'Cashier',
-                        subtitle: 'Quick Billing',
-                        icon: Icons.receipt_long,
-                        color: Colors.green,
                       ),
                     ],
                   ),
@@ -100,7 +100,7 @@ class RoleCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => LoginPage(role: title), // ✅ Navigate to login with role
+              builder: (_) => LoginPage(role: title), // Pass the role here
             ),
           );
         },

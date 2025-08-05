@@ -1,9 +1,15 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'features/home/pos_home.dart'; // ✅ Import POSHomePage
+import 'package:provider/provider.dart';
+import 'core/services/auth_service.dart';
+import 'routes/app_routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthService(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +24,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const POSHomePage(), // ✅ Start directly with the home page
+      initialRoute: '/',
+      onGenerateRoute: (settings) => AppRoutes.generateRoute(settings, context),
     );
   }
 }
