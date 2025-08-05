@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../stockkeeper/stockkeeper_dashboard.dart';
-import '../stockkeeper/stockkeeper_products.dart'; // Import StockKeeperDashboard
+import '../stockkeeper/stockkeeper_products.dart';
 import '../stockkeeper/stockkeeper_inventory.dart';
 import '../stockkeeper/stockkeeper_reports.dart';
 import '../stockkeeper/stockkeeper_cashier.dart';
@@ -12,7 +12,7 @@ class StockKeeperHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B1623), // Dark background
+      backgroundColor: const Color(0xFF0B1623),
       appBar: AppBar(
         title: const Text(
           'Stock Keeper Home',
@@ -25,198 +25,90 @@ class StockKeeperHome extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // Check if it's a larger screen (desktop) or mobile
+            // Common tiles that work for both desktop and mobile
+            final tiles = [
+              DashboardTile(
+                title: 'Dashboard',
+                subtitle: 'Overview',
+                icon: Icons.dashboard,
+                color: Colors.redAccent,
+                onTap: () => _navigateTo(context, const StockKeeperDashboard()),
+              ),
+              DashboardTile(
+                title: 'Products',
+                subtitle: 'Manage Items',
+                icon: Icons.category,
+                color: Colors.green,
+                onTap: () => _navigateTo(context, const StockKeeperProducts()),
+              ),
+              DashboardTile(
+                title: 'Stocks',
+                subtitle: 'Inventory',
+                icon: Icons.inventory,
+                color: Colors.blue,
+                onTap: () => _navigateTo(context, const StockKeeperInventory()),
+              ),
+              DashboardTile(
+                title: 'Reports',
+                subtitle: 'Charts & Data',
+                icon: Icons.bar_chart,
+                color: Colors.orange,
+                onTap: () => _navigateTo(context, const StockKeeperReports()),
+              ),
+              DashboardTile(
+                title: 'Cashier',
+                subtitle: 'Billing & Payments',
+                icon: Icons.receipt_long,
+                color: Colors.purple,
+                onTap: () => _navigateTo(context, const StockKeeperCashier()),
+              ),
+              DashboardTile(
+                title: 'More',
+                subtitle: 'Settings & Info',
+                icon: Icons.more_horiz,
+                color: Colors.pink,
+                onTap: () => _navigateTo(context, const StockKeeperMore()),
+              ),
+              DashboardTile(
+                title: 'Back',
+                subtitle: 'Go Back',
+                icon: Icons.arrow_back,
+                color: Color.fromARGB(255, 224, 193, 17),
+                onTap: () => Navigator.pop(context),
+              ),
+            ];
+
+            // For larger screens (desktop)
             if (constraints.maxWidth > 800) {
               return GridView.count(
-                crossAxisCount: 4, // 4 tiles per row on desktop
+                crossAxisCount: 4,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                childAspectRatio: 1.2, // Adjust size for desktop
-                children: [
-                  DashboardTile(
-                    title: 'Dashboard',
-                    subtitle: 'Overview',
-                    icon: Icons.dashboard, // 🟢 Dashboard Icon
-                    color: Colors.redAccent,
-                    onTap: () {
-                      // Navigate to the StockKeeperDashboard
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperDashboard(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Products',
-                    subtitle: 'Manage Items',
-                    icon: Icons.category, // 🟢 Category Icon
-                    color: Colors.green,
-                    onTap: () {
-                      // Navigate to the Products page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperProducts(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Stocks',
-                    subtitle: 'Inventory',
-                    icon: Icons.inventory, // 🟢 Inventory Icon
-                    color: Colors.blue,
-                    onTap: () {
-                      // Navigate to the Stocks page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperInventory(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Reports',
-                    subtitle: 'Charts & Data',
-                    icon: Icons.bar_chart, // 🟢 Bar Chart Icon
-                    color: Colors.orange,
-                    onTap: () {
-                      // Navigate to the Reports page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperReports(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Cashier',
-                    subtitle: 'Billing & Payments',
-                    icon: Icons.receipt_long, // 🟢 Receipt Icon
-                    color: Colors.purple,
-                    onTap: () {
-                      // Navigate to the Cashier page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperCashier(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'More',
-                    subtitle: 'Settings & Info',
-                    icon: Icons.more_horiz, // 🟢 More Icon
-                    color: Colors.pink,
-                    onTap: () {
-                      // Navigate to More Settings/Info page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperMore(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Back',
-                    subtitle: 'Go Back',
-                    icon: Icons.arrow_back, // 🟢 Arrow Back Icon
-                    color: Color.fromARGB(255, 224, 193, 17),
-                    onTap: () {
-                      Navigator.pop(context); // Go back to the previous screen
-                    },
-                  ),
-                ],
+                childAspectRatio: 1.2,
+                children: tiles,
               );
-            } else {
-              // Mobile view: same as before
+            } 
+            // For mobile screens
+            else {
               return GridView.count(
-                crossAxisCount: 2, // 2 tiles per row on mobile
+                crossAxisCount: 2,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 childAspectRatio: 1,
-                children: [
-                  DashboardTile(
-                    title: 'Dashboard',
-                    subtitle: 'Overview',
-                    icon: Icons.dashboard, // 🟢 Dashboard Icon
-                    color: Colors.redAccent,
-                    onTap: () {
-                      // Navigate to StockKeeperDashboard
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StockKeeperDashboard(),
-                        ),
-                      );
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Products',
-                    subtitle: 'Manage Items',
-                    icon: Icons.category, // 🟢 Category Icon
-                    color: Colors.green,
-                    onTap: () {
-                      // Navigate to the Products page (add the necessary route if needed)
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Stocks',
-                    subtitle: 'Inventory',
-                    icon: Icons.inventory, // 🟢 Inventory Icon
-                    color: Colors.blue,
-                    onTap: () {
-                      // Navigate to the Stocks page (add the necessary route if needed)
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Reports',
-                    subtitle: 'Charts & Data',
-                    icon: Icons.bar_chart, // 🟢 Bar Chart Icon
-                    color: Colors.orange,
-                    onTap: () {
-                      // Navigate to the Reports page (add the necessary route if needed)
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Cashier',
-                    subtitle: 'Billing & Payments',
-                    icon: Icons.receipt_long, // 🟢 Receipt Icon
-                    color: Colors.purple,
-                    onTap: () {
-                      // Navigate to the Cashier Dashboard (add the necessary route if needed)
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'More',
-                    subtitle: 'Settings & Info',
-                    icon: Icons.more_horiz, // 🟢 More Icon
-                    color: Colors.pink,
-                    onTap: () {
-                      // Navigate to the More Settings/Info page (add the necessary route if needed)
-                    },
-                  ),
-                  DashboardTile(
-                    title: 'Back',
-                    subtitle: 'Go Back',
-                    icon: Icons.arrow_back, // 🟢 Arrow Back Icon
-                    color: Color.fromARGB(255, 224, 193, 17),
-                    onTap: () {
-                      Navigator.pop(context); // Go back to the previous screen
-                    },
-                  ),
-                ],
+                children: tiles,
               );
             }
           },
         ),
       ),
+    );
+  }
+
+  // Helper method for navigation to avoid code duplication
+  void _navigateTo(BuildContext context, Widget page) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }
@@ -226,7 +118,7 @@ class DashboardTile extends StatelessWidget {
   final String subtitle;
   final IconData icon;
   final Color color;
-  final VoidCallback onTap; // Accept the onTap callback for navigation
+  final VoidCallback onTap;
 
   const DashboardTile({
     super.key,
@@ -234,13 +126,13 @@ class DashboardTile extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     required this.color,
-    required this.onTap, // Pass the onTap callback
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap, // Trigger the onTap navigation
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: color,
