@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import '../stockkeeper/stockkeeper_dashboard.dart';  // Import StockKeeperDashboard
-//huttoooo
+import '../stockkeeper/stockkeeper_dashboard.dart';
+import '../stockkeeper/stockkeeper_products.dart'; // Import StockKeeperDashboard
+import '../stockkeeper/stockkeeper_inventory.dart';
+import '../stockkeeper/stockkeeper_reports.dart';
+import '../stockkeeper/stockkeeper_cashier.dart';
+import '../stockkeeper/stockkeeper_more.dart';
+
 class StockKeeperHome extends StatelessWidget {
   const StockKeeperHome({super.key});
 
@@ -10,7 +15,7 @@ class StockKeeperHome extends StatelessWidget {
       backgroundColor: const Color(0xFF0B1623), // Dark background
       appBar: AppBar(
         title: const Text(
-          'Stock Keeper Dashboard',
+          'Stock Keeper Home',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF0B1623),
@@ -34,10 +39,12 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.dashboard, // 🟢 Dashboard Icon
                     color: Colors.redAccent,
                     onTap: () {
-                      // Navigate to the StockKeeperDashboard on tile tap
+                      // Navigate to the StockKeeperDashboard
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const StockKeeperDashboard()),
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperDashboard(),
+                        ),
                       );
                     },
                   ),
@@ -47,7 +54,13 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.category, // 🟢 Category Icon
                     color: Colors.green,
                     onTap: () {
-                      // Navigate to the Products page (add the necessary route if needed)
+                      // Navigate to the Products page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperProducts(),
+                        ),
+                      );
                     },
                   ),
                   DashboardTile(
@@ -56,7 +69,13 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.inventory, // 🟢 Inventory Icon
                     color: Colors.blue,
                     onTap: () {
-                      // Navigate to the Stocks page (add the necessary route if needed)
+                      // Navigate to the Stocks page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperInventory(),
+                        ),
+                      );
                     },
                   ),
                   DashboardTile(
@@ -65,7 +84,13 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.bar_chart, // 🟢 Bar Chart Icon
                     color: Colors.orange,
                     onTap: () {
-                      // Navigate to the Reports page (add the necessary route if needed)
+                      // Navigate to the Reports page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperReports(),
+                        ),
+                      );
                     },
                   ),
                   DashboardTile(
@@ -74,7 +99,13 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.receipt_long, // 🟢 Receipt Icon
                     color: Colors.purple,
                     onTap: () {
-                      // Navigate to the Cashier Dashboard (add the necessary route if needed)
+                      // Navigate to the Cashier page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperCashier(),
+                        ),
+                      );
                     },
                   ),
                   DashboardTile(
@@ -83,10 +114,15 @@ class StockKeeperHome extends StatelessWidget {
                     icon: Icons.more_horiz, // 🟢 More Icon
                     color: Colors.pink,
                     onTap: () {
-                      // Navigate to the More Settings/Info page (add the necessary route if needed)
+                      // Navigate to More Settings/Info page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperMore(),
+                        ),
+                      );
                     },
                   ),
-                  // Back Button
                   DashboardTile(
                     title: 'Back',
                     subtitle: 'Go Back',
@@ -115,7 +151,9 @@ class StockKeeperHome extends StatelessWidget {
                       // Navigate to StockKeeperDashboard
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const StockKeeperDashboard()),
+                        MaterialPageRoute(
+                          builder: (context) => const StockKeeperDashboard(),
+                        ),
                       );
                     },
                   ),
@@ -212,7 +250,7 @@ class DashboardTile extends StatelessWidget {
               color: color.withOpacity(0.4),
               offset: const Offset(0, 6),
               blurRadius: 12,
-            )
+            ),
           ],
         ),
         child: Center(
@@ -231,33 +269,10 @@ class DashboardTile extends StatelessWidget {
               ),
               Text(
                 subtitle,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.white70,
-                ),
+                style: const TextStyle(fontSize: 13, color: Colors.white70),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class StockKeeperDashboard extends StatelessWidget {
-  const StockKeeperDashboard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stock Keeper Dashboard'),
-        backgroundColor: const Color(0xFF0B1623),
-      ),
-      body: const Center(
-        child: Text(
-          'Welcome to Stock Keeper Dashboard!',
-          style: TextStyle(fontSize: 24),
         ),
       ),
     );
