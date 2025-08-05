@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/login/auth/login_page.dart'; // ✅ Import the login page
 
 class POSHomePage extends StatelessWidget {
   const POSHomePage({super.key});
@@ -6,7 +7,7 @@ class POSHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D1B2A), // Dark blue background
+      backgroundColor: const Color(0xFF0D1B2A),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -55,8 +56,6 @@ class POSHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // ✅ Bottom Footer
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
@@ -98,8 +97,11 @@ class RoleCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$title tapped')),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => LoginPage(role: title), // ✅ Navigate to login with role
+            ),
           );
         },
         child: Card(
