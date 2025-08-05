@@ -531,8 +531,7 @@ class _CashierViewPageState extends State<CashierViewPage> {
       });
     }
     setState(() {});
-    Navigator.pop(context);  // Close the dialog
-    Navigator.popUntil(context, (route) => route.isFirst); // Navigate back to the first screen
+    Navigator.pop(context); // Only close dialog
   }
 
   void _showBatchSelectionDialog(Map<String, dynamic> item) {
@@ -573,19 +572,18 @@ class _CashierViewPageState extends State<CashierViewPage> {
   }
 
   void _showQuantityInputDialog(Map<String, dynamic> batch) {
-    int quantity = 1;
+    final controller = TextEditingController(text: '1');
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
         title: Text('Enter quantity for ${batch['name']} (Batch: ${batch['batchID']})'),
         content: TextField(
+          controller: controller,
           autofocus: true,
           keyboardType: TextInputType.number,
-          onChanged: (value) {
-            quantity = int.tryParse(value) ?? 1;
-          },
           onSubmitted: (value) {
-            quantity = int.tryParse(value) ?? 1;
+            final quantity = int.tryParse(value) ?? 1;
             Navigator.pop(context);
             _addToCart(batch, quantity: quantity);
           },
@@ -594,6 +592,7 @@ class _CashierViewPageState extends State<CashierViewPage> {
         actions: [
           TextButton(
             onPressed: () {
+              final quantity = int.tryParse(controller.text) ?? 1;
               Navigator.pop(context);
               _addToCart(batch, quantity: quantity);
             },
@@ -680,9 +679,7 @@ class _CashierViewPageState extends State<CashierViewPage> {
       }
       total += unitPrice * item['quantity'];
     }
-    return isPercentageDiscount
-        ? total - (total * discount / 100)
-        : total - discount;
+    return isPercentageDiscount ? total - (total * discount / 100) : total - discount;
   }
 
   @override
@@ -841,7 +838,6 @@ class _CashierViewPageState extends State<CashierViewPage> {
       ),
     );
   }
-  
 }
 
 class CategoryItemsPage extends StatelessWidget {
