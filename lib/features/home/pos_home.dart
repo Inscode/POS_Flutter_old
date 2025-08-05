@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../features/login/auth/login_page.dart'; // ✅ Import the login page
+import '../../features/login/auth/login_page.dart';
 
 class POSHomePage extends StatelessWidget {
   const POSHomePage({super.key});
