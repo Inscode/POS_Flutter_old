@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../core/services/auth_service.dart';
 import '../features/home/pos_home.dart';
 import '../features/auth/login_page.dart';
-import '../features/stockkeeper/stockkeeper_dashboard.dart';
+import '../features/stockkeeper/stockkeeper_home.dart';
 import '../features/cashier/cashier_dashboard.dart';
 // import '../features/admin/admin_dashboard.dart';
 
@@ -19,7 +19,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoginPage(role: 'StockKeeper'));
       case '/stockkeeper':
         if (user != null && user.role == 'StockKeeper') {
-          return MaterialPageRoute(builder: (_) => const StockkeeperDashboard());
+          return MaterialPageRoute(builder: (_) => const StockKeeperHome());
         }
         break;
       case '/cashier':
