@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensures full git history for SonarQube analysis
+          fetch-depth: 0
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -25,11 +25,15 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Run tests with coverage
+        run: flutter test --coverage
+
       - name: Verify Dart files
         run: |
           echo "Dart files to be analyzed:"
           find lib -name "*.dart" | sort
           echo "Total Dart files found: $(find lib -name "*.dart" | wc -l)"
+          ls -la coverage/lcov.info || echo "lcov.info not found!"
 
       - name: Set up SonarScanner
         run: |
@@ -54,4 +58,5 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.dart.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.verbose=true
