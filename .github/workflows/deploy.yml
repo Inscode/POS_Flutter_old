@@ -41,6 +41,5 @@ jobs:
             -Dsonar.sources=lib \
             -Dsonar.language=dart \
             -Dsonar.sourceEncoding=UTF-8 \
-            -Dsonar.dart.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.host.url=${{ secrets.SONAR_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
