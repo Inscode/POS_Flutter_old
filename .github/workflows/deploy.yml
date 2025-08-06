@@ -32,8 +32,12 @@ jobs:
           sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
           echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
 
-      - name: Run SonarScanner
+      - name: Install SonarScanner
         run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+          sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
+          export PATH="/opt/sonar-scanner/bin:$PATH"
           sonar-scanner \
             -Dsonar.projectKey=flutter_pos \
             -Dsonar.projectName="Flutter POS System" \
