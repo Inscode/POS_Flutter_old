@@ -22,8 +22,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # - name: Run tests with coverage
-      #   run: flutter test --coverage
+      - name: Verify project structure
+        run: |
+          echo "Project structure:"
+          ls -R lib/
+          echo ""
+          echo "Dart files found:"
+          find lib -name "*.dart" | head -10
+          echo "Total Dart files: $(find lib -name "*.dart" | wc -l)"
 
       - name: Install SonarScanner
         run: |
@@ -32,12 +38,8 @@ jobs:
           sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
           echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
 
-      - name: Install SonarScanner
+      - name: Run SonarQube Analysis
         run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-          sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
-          export PATH="/opt/sonar-scanner/bin:$PATH"
           sonar-scanner \
             -Dsonar.projectKey=flutter_pos \
             -Dsonar.projectName="Flutter POS System" \
