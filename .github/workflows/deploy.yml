@@ -58,5 +58,4 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN \
-            # -Dsonar.dart.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.verbose=true
