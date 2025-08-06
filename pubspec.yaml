@@ -16,6 +16,7 @@ dependencies:
   lottie: ^3.3.1
   go_router: ^14.0.2
   flutter_vector_icons: ^2.0.0 # Add this line for vector icons (including Feather icons)
+  mobile_scanner: ^3.5.5
 
 
 
