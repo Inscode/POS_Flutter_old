@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # - name: Run tests with coverage
-      #   run: flutter test --coverage
+      - name: Run tests with coverage
+        run: flutter test --coverage
 
       - name: Verify Dart files
         run: |
@@ -35,13 +35,13 @@ jobs:
           echo "Total Dart files found: $(find lib -name "*.dart" | wc -l)"
           ls -la coverage/lcov.info || echo "lcov.info not found!"
 
-      - name: Set up SonarScanner
-        run: |
-          sudo apt-get install -y unzip
-          wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip
-          sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
-          echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
+      # - name: Set up SonarScanner
+      #   run: |
+      #     sudo apt-get install -y unzip
+      #     wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+      #     unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip
+      #     sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
+      #     echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: Run SonarQube Analysis
         env:
@@ -56,6 +56,7 @@ jobs:
             -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/*.config.dart \
             -Dsonar.language=dart \
             -Dsonar.sourceEncoding=UTF-8 \
+            -Dsonar.coverageReportPaths=coverage/lcov.info \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN \
             -Dsonar.verbose=true
